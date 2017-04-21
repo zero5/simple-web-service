@@ -1,0 +1,115 @@
+######################################
+### Distributed web-service sample ###
+######################################
+
+
+
+############################################
+Requirements:
+1. Python 3+, virtualenv, pip
+2. MySQL database (should be configured in backend/config.json)
+3. All python requirements (could be downloaded with `pip install -r requirements.txt`)
+############################################
+
+
+############################################
+Service structure:
+Web interface FrontEnd <-> BackEnd call <-> DB interaction
+
+
+FrontEnd <-> BackEnd interaction using XML-requests.
+############################################
+
+############################################
+XML-requests and responses:
+
+1. Get user
+<xml>
+    <action>get_user</action>
+    <parameters>
+        <id>{0}</id>
+    </parameters>
+</xml>
+Response:
+<xml>
+    <action>get_user</action>
+    <state>OK</state>
+    <result>
+        <user>
+            <id>{0}</id>
+            <name>{1}</name>
+            <status>{2}</status>
+        </user>
+    </result>
+</xml>
+
+2. Get all users
+Request:
+<xml>
+    <action>get_users</action>
+    <parameters>
+    </parameters>
+</xml>
+Response:
+<xml>
+    <action>get_users</action>
+    <state>OK</state>
+    <result>
+        <user>
+            <id>{0}</id>
+            <name>{1}</name>
+            <status>{2}</status>
+        </user>
+    </result>
+</xml>
+
+
+3. Add user
+Request:
+<xml>
+    <action>add_user</action>
+    <parameters>
+        <name>{0}</name>
+        <status>{1}</status>
+    </parameters>
+</xml>
+Response:
+<xml>
+    <action>add_user</action>
+    <state>OK</state>
+    <result>
+        <user>
+            <id>{0}</id>
+            <name>{1}</name>
+            <status>{2}</status>
+        </user>
+    </result>
+</xml>
+############################################
+
+############################################
+Example
+Request:
+<xml>
+    <a1ction>add_user</action>
+    <parameters>
+        <name>User3</name>
+        <status>Active</status>
+    </parameters>
+</xml>
+
+Response:
+<xml>
+    <action>add_user</action>
+    <state>OK</state>
+    <result>
+        <user>
+            <id>1</id>
+            <name>User3</name>
+            <status>Active</status>
+        </user>
+    </result>
+</xml>
+############################################
+
+

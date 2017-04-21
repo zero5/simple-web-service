@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <link href="/static/css/milligram.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    %if user:
+    User added
+    <ul>
+        <li>ID: {{ user['id'] }}</li>
+        <li>Name: {{ user['name'] }}</li>
+        <li>Status: {{ user['status'] }}</li>
+    </ul>
+    %end
+
+    <form action="" method="POST">
+        <label for="name">Name: </label>
+        <input id="name" type="text" name="name">
+        <label for="status">Status: </label>
+        <input id="status" type="text" name="status">
+        <input type="submit" value="Add">
+    </form>
+    <br />
+    <a href="/">&larr;Home</a>
+</body>
+</html>

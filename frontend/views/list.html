@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User list</title>
+    <link href="/static/css/milligram.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h3>Found users:</h3>
+    %for user in users:
+    <ul>
+        <li>ID: {{ user['id'] }}</li>
+        <li>Name: {{ user['name'] }}</li>
+        <li>Status: {{ user['status'] }}</li>
+    </ul>
+    %end
+    <br />
+    <a href="/">&larr;Home</a>
+
+</body>
+</html>
