@@ -14,7 +14,7 @@ Requirements:
 
 ############################################
 Service structure:
-Web interface FrontEnd <-> BackEnd call <-> DB interaction
+Web interface FrontEnd <-> BackEnd <-> DB interaction
 
 
 FrontEnd <-> BackEnd interaction using XML-requests.

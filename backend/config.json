@@ -1,6 +1,3 @@
 {
-  "host": "localhost",
-  "user": "root",
-  "password": "",
-  "db": "test_service"
+  "dbfile": "test.db"
 }

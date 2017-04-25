@@ -26,16 +26,32 @@ def get_user_get():
 
 @get('/list')
 def list():
-    users = service_get_users()
+    res = service_get_users()
+    if len(res) < 2:
+        return 'ERROR'
+    elif res[0] == 'ERROR':
+        return '''
+    {0}
+    <br />
+    <a href="/">&larr;Home</a>
+    '''.format(res[1])
+    users = res[1]
     return template('list.html', users=users)
 
 
 @post('/get_user')
 def get_user_post():
     id = request.forms.get('id')
-    user = service_get_user(id)
-    if not user:
-        return 'Error'
+    res = service_get_user(id)
+    if len(res) < 2:
+        return 'ERROR'
+    elif res[0] == 'ERROR':
+        return '''
+    {0}
+    <br />
+    <a href="/">&larr;Home</a>
+    '''.format(res[1])
+    user = res[1]
     return template('get_user.html', user=user[0])
 
 
@@ -48,9 +64,16 @@ def add_user_get():
 def add_user_post():
     name = request.forms.get('name')
     status = request.forms.get('status')
-    user = service_add_user(name, status)
-    if not user:
-        return 'Error'
+    res = service_add_user(name, status)
+    if len(res) < 2:
+        return 'ERROR'
+    elif res[0] == 'ERROR':
+        return '''
+    {0}
+    <br />
+    <a href="/">&larr;Home</a>
+    '''.format(res[1])
+    user = res[1]
     return template('add_user.html', user=user[0])
 
 
@@ -63,10 +86,7 @@ def service_get_user(id):
                     <id>{0}</id>
                 </parameters>
             </xml>'''.format(id)
-    result = send_request(body)
-    if result == 'ERROR':
-        return None
-    return result
+    return send_request(body)
 
 
 # Get user service call
@@ -76,10 +96,7 @@ def service_get_users():
                 <parameters>
                 </parameters>
             </xml>'''.format(id)
-    result = send_request(body)
-    if result == 'ERROR':
-        return None
-    return result
+    return send_request(body)
 
 
 # Add user service call
@@ -91,10 +108,7 @@ def service_add_user(name, status):
                     <status>{1}</status>
                 </parameters>
             </xml>'''.format(name, status)
-    result = send_request(body)
-    if result == 'ERROR':
-        return None
-    return result
+    return send_request(body)
 
 
 def send_request(body):
@@ -113,9 +127,9 @@ def send_request(body):
             for t in u:
                 user[t.tag] = t.text
             users.append(user)
-        return users
+        return ('users', users)
     else:
-        return 'ERROR'
+        return ('ERROR', root.find('error').text)
 
 
 # Start server
